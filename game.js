@@ -1,3 +1,8 @@
+if (window.matchMedia("(max-width: 800px)").matches) {
+    $("#level-title").text("Tap Anywhere to Start")
+}
+
+
 var userClickedPattern = [];
 
 var gamePattern = [];
@@ -38,6 +43,8 @@ function nextSequence() {
 
     playSound(randomChosenColour);
 
+    //Beginner guide
+
     if (level === 1) {
         $("h3").html("Simon says:<br>Click " + gamePattern[0] + " button!")
     }
@@ -54,17 +61,33 @@ function nextSequence() {
 
 $(".btn").click(function () {
 
-    var userChosenColor = $(this).attr("id");
+    if (started == true){
 
-    userClickedPattern.push(userChosenColor);
+        var userChosenColor = $(this).attr("id");
 
-    playSound(userChosenColor);
+        userClickedPattern.push(userChosenColor);
 
-    animatePress(userChosenColor);
+        playSound(userChosenColor);
 
-    checkAnswer(userClickedPattern.length - 1);
+        animatePress(userChosenColor);
+
+        checkAnswer(userClickedPattern.length - 1);
+    }
 })
 
+if (window.matchMedia("(max-width: 800px)").matches) {
+
+    $(document).click(function () {
+        if (started == false) {
+            $("h1").text("Level " + level);
+    
+            setTimeout(nextSequence, 1000);
+    
+            started = true;
+        }
+    })
+}
+else {
 $(document).keydown(function () {
     if (started == false) {
         $("h1").text("Level " + level);
@@ -74,6 +97,8 @@ $(document).keydown(function () {
         started = true;
     }
 });
+}
+
 
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
@@ -86,8 +111,14 @@ function checkAnswer(currentLevel) {
     }
 
     else {
-        $("h1").text("Game Over, Press F to Restart");
 
+        if (window.matchMedia("(max-width: 800px)").matches) {
+            $("h1").text("Game Over, Tap to Restart");
+        }
+        else {
+            $("h1").text("Game Over, Press F to Restart");
+        }
+        
         new Audio('sounds/wrong.mp3').play();
 
         $("body").addClass("game-over");
@@ -96,7 +127,7 @@ function checkAnswer(currentLevel) {
             $("body").removeClass("game-over");
         }, 100)
 
-        startOver();
+        setTimeout(startOver, 500);
     }
 }
 
