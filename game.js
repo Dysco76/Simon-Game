@@ -55,7 +55,7 @@ function nextSequence() {
         $("h3").html("Simon says:<br>" + touch + gamePattern[0] + " button!")
     }
     else if (level === 2) {
-        $("h3").html("Now Simon says:<br>" + touch + gamePattern[0] + " button!<br> 2. Click " + gamePattern[1] + " button!")
+        $("h3").html("Now Simon says:<br>1. " + touch + gamePattern[0] + " button!<br>2. " + touch + gamePattern[1] + " button!")
     }
     else if (level === 3) {
         $("h3").text("You got this, champ!")
