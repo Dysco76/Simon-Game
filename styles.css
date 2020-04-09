@@ -78,7 +78,7 @@ h3 {
 @media screen and (max-width: 700px) {
 
 #level-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 5% 2.5%;
   line-height: 1.5;
 }
@@ -88,11 +88,13 @@ h3 {
   }
 
   .btn {
-    width: 140px;
-    height: 140px;
+    margin: 15px;
+    width: 100px;
+    height: 100px;
   }
 
   .hint {
+    font-size: 0.8rem;
     position: static;
     margin: auto;
     width: 80%;
